@@ -20,3 +20,14 @@
 
 allow system_server vendor_proc_charger:dir search;
 allow system_server vendor_proc_oppo_secure_common_file:dir search;
+
+# ============================================================
+# FIX: LinearmotorVibratorService boot loop under Enforcing SELinux
+#
+# system_server publishes the "linearmotor" binder service (mapped to
+# linearmotor_service in service_contexts, defined in service.te) during
+# LinearmotorVibratorService.onStart(). Without this, addService() is
+# denied and system_server crashes in a boot loop:
+#   java.lang.SecurityException: SELinux denied for service.
+# ============================================================
+add_service(system_server, linearmotor_service)

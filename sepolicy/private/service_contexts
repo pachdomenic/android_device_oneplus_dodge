@@ -1,0 +1,5 @@
+# Map the "linearmotor" binder service (published by
+# com.android.server.vibrator.LinearmotorVibratorService via
+# Context.LINEARMOTOR_VIBRATOR_SERVICE = "linearmotor") to its own type
+# so system_server can add it under Enforcing. See service.te.
+linearmotor                               u:object_r:linearmotor_service:s0

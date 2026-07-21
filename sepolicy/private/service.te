@@ -1,0 +1,17 @@
+# ============================================================
+# FIX: LinearmotorVibratorService boot loop under Enforcing SELinux
+#
+# The picked com.android.server.vibrator.LinearmotorVibratorService
+# (com.oplus.os.ILinearmotorVibratorService) publishes a binder service
+# named "linearmotor" from system_server. With no service type defined
+# and no service_contexts mapping, it resolves to default_android_service,
+# which system_server may not add under Enforcing -> the onStart()
+# publishBinderService() call throws SecurityException and crashes
+# system_server in a boot loop.
+#
+# Define a dedicated type. app_api_service so apps can find() it when they
+# call Context.getSystemService(LINEARMOTOR_VIBRATOR_SERVICE); the matching
+# add is granted in system_server.te.
+# ============================================================
+
+type linearmotor_service, app_api_service, system_server_service, service_manager_type;
