@@ -340,6 +340,10 @@ public class DeviceSettings extends SettingsBasePreferenceFragment
     }
 
     private boolean handleSliderUsageChange(String newValue) {
+        // No value persisted yet (first launch): fall back to the default usage.
+        if (newValue == null) {
+            newValue = Constants.NOTIF_SLIDER_FOR_NOTIFICATION;
+        }
         switch (newValue) {
             case Constants.NOTIF_SLIDER_FOR_NOTIFICATION:
                 return updateSliderActions(

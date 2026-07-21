@@ -24,6 +24,7 @@
         <ListPreference
             android:key="slider_usage"
             android:icon="@drawable/ic_slider"
+            android:defaultValue="1"
             android:dialogTitle="@string/notification_slider_usage_title"
             android:title="@string/notification_slider_usage_title"
             android:entries="@array/notification_slider_usage_entries"
