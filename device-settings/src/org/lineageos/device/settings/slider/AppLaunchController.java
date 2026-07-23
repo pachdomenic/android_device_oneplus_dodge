@@ -94,11 +94,13 @@ public final class AppLaunchController extends SliderControllerBase {
             Log.i(TAG, "Launched " + pkg);
         } catch (Exception e) {
             Log.e(TAG, "Failed to launch " + pkg, e);
+            return 0;
         }
 
-        // Return 0: the app opening is the feedback, don't trigger the
-        // SystemUI tri-state dialog (it has no icon for this mode).
-        return 0;
+        // Attach the package so the SystemUI tri-state dialog can show
+        // the app's icon and label next to the slider
+        mFeedbackPackage = pkg;
+        return Constants.MODE_APP_LAUNCH;
     }
 
     @Override
